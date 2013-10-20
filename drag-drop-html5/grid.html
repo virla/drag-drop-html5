@@ -1,0 +1,886 @@
+<head>
+    <style type="text/css">
+       
+    </style>
+	
+	 <link href="css/bootstrap.css" rel="stylesheet">
+	 <link href="css/bootstrap-theme.css" rel="stylesheet">
+	
+	
+	
+<script type="text/javascript" src="js/cloudcode_sample.js"> </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+
+	
+    <script>
+	var fullstringarray = new Array();
+	var temparray = new Array();
+	
+	function niraj()
+	{
+	alert("hi")
+	}
+	
+function removemebutton(elem)
+	{
+	//alert("removemebutton is callend")
+	console.log($("#mainlist3 ul").length)
+	var parent = elem.parentNode;
+	parent.remove()
+	console.log(elem.value)
+	temparray.pop()
+	}
+	 
+	function random_sting() {
+    var chars = "ancdfhhnniufjjjjabcdefghijklmnopqurstuvwxyz0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ0123456789aabcdniraj";
+    return chars.substr( Math.floor(Math.random() * 62), 20);
+}
+	
+	function insertintodb()
+	{
+	console.log(document.getElementById("disabledInputfinalstring").innerHTML)
+	
+	  $.ajax({
+        url: "127.0.0.1/viraldemo/index.php",
+        type: "get",
+		data: { inputdata : document.getElementById("disabledInputfinalstring").innerHTML } // , url_type : ur_type_op } //serializedData
+    }).success( console.log("lllllllllllll") );
+	
+	
+	
+	}
+	
+	
+// Drag and Drop ++++++++++++++++++++++++++++++++++++++ DRAG DROP 
+
+function allowDrop (ev) {
+   ev.preventDefault ();
+}
+
+function drag (ev) {
+
+  ev.dataTransfer.setData ("src", ev.target.id);
+}
+
+function swapdrop (ev) {
+  console.log("swap drop function call")	
+  ev.preventDefault ();
+  var src = document.getElementById (ev.dataTransfer.getData ("src"));
+  var srcParent = src.parentNode;
+  var tgt = ev.currentTarget.firstElementChild;
+
+  ev.currentTarget.replaceChild (src, tgt);
+  srcParent.appendChild (tgt);
+}
+
+
+
+function dropremove(ev)
+	{
+	
+	console.log("drop remove function is called")
+	
+	ev.preventDefault ();
+	var src = document.getElementById (ev.dataTransfer.getData ("src"));
+	console.log("droppable elmeent id was " + src.id)
+	//var src_id = src.parentNode.id
+	console.log("now parent of " + src.id + " is " +  src.parentNode.id)
+	
+	console.log("now parent of " + src.parentNode.id + " is LI NODE and whose parent UL NODE is "  + src.parentNode.parentNode.parentNode.id)
+	console.log("now to be remove NODE id is LI NODE  " + src.parentNode.parentNode.id )
+	src.parentNode.parentNode.remove()
+	
+	}
+
+	
+function dropcopy(ev)
+                    {
+                    
+					ev.preventDefault();
+					
+                    var data=ev.dataTransfer.getData("src");
+					console.log("data to be copy's  id  is  " + data )
+					
+					var original = document.getElementById(data);
+					console.log("again getting data of copy " + original )
+					
+                    var copyimg = document.createElement("img");
+					console.log("creating new img element  " + copyimg )
+					
+					copyimg.src = original.src;
+					
+					console.log("orignal img src full path is " +  original.src)
+					var reult = original.src.split("/")
+					console.log("img end path is " +  reult[reult.length-1])
+					
+					console.log("creating two  random string to assign  a div and it's img")
+					var fixrandom_onetime = random_sting() 
+					console.log("div's id's random string is : " + fixrandom_onetime)
+					var fixrandomimg = random_sting() 
+					console.log("img's id's random string is : " + fixrandomimg)
+					
+					$("#mainlist").append('<li><div id=' + fixrandom_onetime + '  ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">	<img id=' + fixrandomimg + '  src=img/'+ reult[reult.length-1] + ' alt="broken img remove this"  draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail"></div></li>')
+					
+                    //ev.target.appendChild(copyimg);
+
+                    }
+
+
+					
+function dropcopymaininside(ev)
+                    {
+					//console.log(temparray)
+				//	fullstringarray.push( { "elementnumber" : fullstringarray.length , "data" : temparray } )
+				//console.log(fullstringarray[fullstringarray.fullstringarray.length])
+				
+					fullstringarray.push([temparray])
+					
+					console.log(fullstringarray)
+					console.log("total len " + fullstringarray.length)
+					console.log(fullstringarray[fullstringarray.length-1][1])
+					
+					console.log('['+fullstringarray.join(',')+']');
+					temparray = [ ]
+		
+					console.log("first time mainlist2 UL genration")
+                    ev.preventDefault();
+                    var data=ev.dataTransfer.getData("src");
+					
+					var original = document.getElementById(data);
+					
+					console.log("draggble elemnt id  is (hint copy id)  " + original.id )
+					
+					
+                    var copyimg = document.createElement("img");
+					console.log("img copy element is type of " + copyimg )
+					
+					copyimg.src = original.src;
+					
+					
+					
+					console.log("orignal img src full path is " +  original.src)
+					var reult = original.src.split("/")
+					console.log("img end path is " +  reult[reult.length-1])
+					
+					console.log("creating two  random string to assign  a div and it's img")
+					var fixrandom_onetime = random_sting() 
+					console.log("div's id's random string is : " + fixrandom_onetime)
+					var fixrandomimg = random_sting() 
+					console.log("img's id's random string is : " + fixrandomimg)
+					
+					//$("#mainlist2").html("")
+					console.log("importaant +++++++++++++++++++++++++++++++ " + ev.currentTarget.parentNode.id)
+					console.log("removing drp img  li ")
+					ev.currentTarget.parentNode.remove()
+					
+					$("#mainlist2").append('<li><div id=' + fixrandom_onetime + '  ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">	<img id=' + fixrandomimg + '  src=img/'+ reult[reult.length-1] + ' alt="broken img remove this"  draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail"></div></li>')	
+					
+					$("#mainlist2").append('<li><button type="button"   class="btn btn-default" onclick="plusimgbuttonclick()"><img id="plusimgid" src="img/plus.png"  width="50" height="50" class="img-thumbnail"></button></li>')
+					
+					var conid = original.id
+					if(conid  == "girlinside")
+					{
+					var sidebarlinkvalue = "girl"
+					var sidebarbodyvalue = "girl a"
+					
+					var arraydatafull = [   [ [  "girl" , "girl saw", "girl lgirlked" , "girl mgirlssed" , "girl paid"],["girls","girls saw" , "girls liked" , "girls missed","girls paid"],["you","you saw","you liked","you missed","you paid"],[  "i & girls" , "i &  girls saw", "i & girls liked" , "i & girls missed" , "i  & girls paid"] ] , [ [  "i" , "i see", "i like" , "i miss" , "i play"],["girls","girls see" , "girls like" , "girls miss","girls play"],["you","you see","you like","you miss","you play"] ] , [ [  "i  " , "i will see", "i will like" , "i will miss" , "i will play"],["girls","girls will see" , "girls will like" , "girls will miss","girl will play"],["you","you will see","you will like","you will  miss","you will play"] ]   ]
+					
+					}
+					else if(conid == "carinside")
+					{
+					
+					var sidebarlinkvalue = "car"
+					var sidebarbodyvalue = "car a"
+					
+					var arraydatafull = [   [ [  "car" , "car saw", "car lcarked" , "car mcarssed" , "car paid"],["cars","cars saw" , "cars liked" , "cars missed","cars paid"],["you","you saw","you liked","you missed","you paid"],[  "i & cars" , "i &  cars saw", "i & cars liked" , "i & cars missed" , "i  & girls paid"] ] , [ [  "i" , "i see", "i like" , "i miss" , "i play"],["girls","girls see" , "girls like" , "girls miss","girls play"],["you","you see","you like","you miss","you play"] ] , [ [  "i  " , "i will see", "i will like" , "i will miss" , "i will play"],["girls","girls will see" , "girls will like" , "girls will miss","girl will play"],["you","you will see","you will like","you will  miss","you will play"] ]   ]
+					
+					}
+					else if(conid == "userinside")
+					{
+					
+					var arraydatafull = [   [ [  "i" , "i saw", "i liked" , "i missed" , "i paid"],["is","is saw" , "is liked" , "is missed","is paid"],["you","you saw","you liked","you missed","you paid"],[  "i & is" , "i &  is saw", "i & is liked" , "i & is missed" , "i  & girls paid"] ] , [ [  "i" , "i see", "i like" , "i miss" , "i play"],["girls","girls see" , "girls like" , "girls miss","girls play"],["you","you see","you like","you miss","you play"] ] , [ [  "i  " , "i will see", "i will like" , "i will miss" , "i will play"],["girls","girls will see" , "girls will like" , "girls will miss","girl will play"],["you","you will see","you will like","you will  miss","you will play"] ]   ]
+					
+					var sidebarlinkvalue = "user"
+					var sidebarbodyvalue = "user a"
+					}
+					else if(conid == "shampaininside")
+					{
+					var sidebarlinkvalue = "wine"
+					var sidebarbodyvalue = "wine a"
+					
+					var arraydatafull = [   [ [  "shampamin" , "shampamin saw", "shampamin lshampaminked" , "shampamin mshampaminssed" , "shampamin paid"],["shampamins","shampamins saw" , "shampamins liked" , "shampamins missed","shampamins paid"],["you","you saw","you liked","you missed","you paid"],[  "i & shampamins" , "i &  shampamins saw", "i & cars liked" , "i & cars missed" , "i  & girls paid"] ] , [ [  "i" , "i see", "i like" , "i miss" , "i play"],["girls","girls see" , "girls like" , "girls miss","girls play"],["you","you see","you like","you miss","you play"] ] , [ [  "i  " , "i will see", "i will like" , "i will miss" , "i will play"],["girls","girls will see" , "girls will like" , "girls will miss","girl will play"],["you","you will see","you will like","you will  miss","you will play"] ]   ]
+					}
+					else if(conid == "fullidinside")
+					{
+					var sidebarlinkvalue = "full"
+					var sidebarbodyvalue = "full a"
+					
+					var arraydatafull = [   [ ["full","cars saw" , "cars liked" , "cars missed","cars paid"],["you","you saw","you liked","you missed","you paid"],[  "i & cars" , "i &  cars saw", "i & cars liked" , "i & cars missed" , "i  & girls paid"] ] , [ [  "i" , "i see", "i like" , "i miss" , "i play"],["girls","girls see" , "girls like" , "girls miss","girls play"],["you","you see","you like","you miss","you play"] ] , [ [  "i  " , "i will see", "i will like" , "i will miss" , "i will play"],["girls","girls will see" , "girls will like" , "girls will miss","girl will play"],["you","you will see","you will like","you will  miss","you will play"] ]   ]
+					
+					}
+					else
+					{
+					console.log("error in wrong img drop")
+					}
+					
+					
+					
+					//ev.target.appendChild(copyimg);
+					
+					
+					
+					fnsidebaritem1bodybuttongrp(arraydatafull)
+						
+					$("#mainlist3").append('<li id=' + random_sting() + ' ><ul class="list-inline" id=' + random_sting() + '><li><div id="' + random_sting()  + '"   ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">	<img id=' + random_sting()  + '  src=img/'+ reult[reult.length-1] + ' alt="broken img remove this"  draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail"></div></li></ul></li>')	
+					
+					console.log("mainlist item is done")
+
+                    }			
+
+
+
+
+
+
+					
+  
+function plusimgbuttonclick()
+{
+
+$("#mainlist2").append('<li><div   id="mainlist2childid"    ondrop="dropcopymaininside(event)" ondragover="allowDrop(event)" ><img id="mainlist2childimgid" src="li.png" alt="drop img "  width="50" height="50" class="img-thumbnail"></div></li>')
+}					
+
+
+
+					
+// sider bar function ++++++++++++++++++++++++++++++++++++++ SIDEBAR					
+function fnsidebaritem1bodybuttongrp(fullarraydata)
+{
+			console.log(" sidebar menu gen strat : tense is  " + document.getElementById("tensesid").value)
+			
+		
+		if (document.getElementById("tensesid").value == "Past")
+		{
+			//alert("con1 " + document.getElementById("tensesid").value);
+			var arraydata = fullarraydata[0];
+		}
+		else if (document.getElementById("tensesid").value == "Present")
+		{
+			//alert("con2 " + document.getElementById("tensesid").value);
+			var arraydata = fullarraydata[1];
+		}
+		else if (document.getElementById("tensesid").value == "Future")
+		{
+			//alert("con3 " + document.getElementById("tensesid").value);
+			var arraydata = fullarraydata[2];
+		
+		}
+		else
+		{
+			alert("error  in tense selected value ");
+		}
+			console.log(" sidebar menu is loading  ")
+			$("#accordion").html("")
+			
+			for(j=1 ; j < arraydata.length + 1 ; j++)
+			{
+					//if(j > 3)
+					//{
+						console.log("menu " + j + "  loading")
+						$("#accordion").append('<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse"  id="sidebaritem'  + j + 'link' + '"  data-parent="#accordion" href="#collapse' + j + '">Collapsible Group Item #3</a></h4></div><div id="collapse' + j + '" class="panel-collapse collapse">						<div class="panel-body" id="sidebaritem'+ j + 'body">																				<div class="btn-group-vertical btn-block" id="sidebaritem' + j + 'bodybuttongrp" data-toggle="buttons">									</div>  			</div> 				</div> 		</div>')
+
+					/*}	
+					else
+					{
+					console.log("menu is limited to 3 ") 
+					console.log(document.getElementById("accordion"))
+					document.getElementById("accordion").removeChild(document.getElementById("accordion").lastChild);
+					console.log("yes its done")
+					}
+					*/
+					
+					var smallarraydata = arraydata[j-1]
+					
+					$("#sidebaritem"+ j + "link").html("start with " + smallarraydata[0])
+					
+					$("#sidebaritem"+ j + "bodybuttongrp").html("")
+					 
+					 
+					
+					for (i=1; i < smallarraydata.length ;  i++)
+					{
+					/*		
+						$("#sidebaritem"+j+"bodybuttongrp").append('<label class="btn btn-default"><input type="radio" name="options" id="option1">'+ smallarraydata[i] + '</label>')	
+					*/	
+						$("#sidebaritem"+j+"bodybuttongrp").append('<button type="button"  value="' + smallarraydata[i] +'"  class="btn btn-default" onclick="finalstringgetselectedbuttonvalue(this.value)">'+ smallarraydata[i] +'</button>')
+					}
+					
+					
+			}
+			
+
+}		
+
+
+		function finalstringgetselectedbuttonvalue(value)
+{
+		console.log("right side bar buuton cilck fn is called")
+		
+	//	console.log(document.getElementById("mainlist3"))
+		var mainlist3injs = document.getElementById("mainlist3")
+		
+		console.log("last child of mainlist3  " + document.getElementById("mainlist3").lastElementChild.id )
+		//alert(value)
+		
+		//$("#smalltextid").append('<span class="label label-info " >' + value + ' </span><img id="plusimgid" src="img/plus.png"  width="50" height="50" class="img-thumbnail">')
+		
+		console.log("imp " + document.getElementById("mainlist3").lastElementChild.firstElementChild.id ) 
+		
+		var edtablebuttonsourceparent  = document.getElementById("mainlist3").lastElementChild.firstElementChild.id
+		
+		//edtablebuttonsourceparent.appendChild('<li><button type="button"  value="' + value + '" class="btn btn-default" onclick="niraj()">'+ value + '</button></li>')
+		
+		$("#" + edtablebuttonsourceparent +"").append('<li><button type="button"  value="' + value + '" class="btn btn-default" onclick="removemebutton(this)">'+ value + '</button></li>')
+		
+	//	$("#smalltextid").append('<button type="button"  value="' + value + '" class="btn btn-default" onclick="niraj()"><img id="plusimgid" src="img/plus.png"  width="50" height="50" class="img-thumbnail">'+ value + '</button>')	
+		
+		temparray.push(value)
+		console.log(temparray)
+		console.log('['+temparray.join(',')+']');
+		
+		$("#disabledInputfinalstring").append(value + " " )
+		var buzzstrcal = document.getElementById("disabledInputfinalstring")
+		
+		console.log(buzzstrcal.innerHTML.length)
+		
+		$("#buzzstringcal").html('length of buzz string out of :  ' + buzzstrcal.innerHTML.length + '/120')
+		//id="buzzstringcal"
+
+}
+
+
+
+
+
+  // ++++++++++++++++++++++++++++++++++++++++++++  to be romve function add img menu into main panel 
+  
+ 
+
+
+function modifybuzzline()
+{
+
+	console.log(document.getElementById("disabledInputfinalstring").innerHTML)
+	var modifybuzzlineeditdisply = document.getElementById("disabledInputfinalstring").innerHTML
+	$("#modifybuzzlineid").html('<div class="input-group"> <input type="text" class="form-control" placeholder='+ modifybuzzlineeditdisply + '> <span class="input-group-btn">	<button class="btn btn-default" type="button">modify!</button> </span> </div>')
+}
+
+  function addbybutton()
+  {
+  //console.log("add by button click ")
+  //console.log(random_sting())
+	var strings = ['000', '001', 'car','dog', 'girl', 'user' ];
+
+	var randomIndex = Math.floor(Math.random() * strings.length);
+	console.log(strings[randomIndex])
+	var randomString = "img/" + strings[randomIndex] + '.png'
+	console.log(randomString)
+	
+  
+  var img_src = "01.jpg"
+  var fixrandom_onetime = random_sting() 
+  var fixrandomimg = random_sting() 
+  $("#mainlist").append('<li><div id=' + fixrandom_onetime + ' ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">	<img id=' + fixrandomimg + '  src='+  randomString  + ' alt="broken img remove this"  draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail"></div></li><')
+  
+  }
+  
+
+  
+  
+	
+	</script>
+	
+	 <script src="js/bootstrap.min.js"></script>
+	 <script src="js/bootstrap.js"></script>	
+</head>
+
+<body>
+	 <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li ><a href="./">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	
+<p>
+<br>
+<br>
+<br>
+<br>	
+
+<div class="container">
+
+<!--
+<div class="row jumbotron">
+
+    <ul class="list-inline">
+      
+	
+				  <li>
+				  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+						<img id="drag1" src="01.jpg" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+					</div>
+				  </li>
+  
+				  <li>
+						  <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<img id="drag2" src="lii.png" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+							</div>
+				  </li>
+				  
+				  <li>
+				  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+						<img id="drag1" src="01.jpg" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+					</div>
+				  </li>
+  
+  
+	</ul>
+	 <div  class="pull-right" id="div3"   ondrop="dropcopy(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<img id="drag2" src="li.png" alt="..."  width="50" height="49" class="img-thumbnail">
+						</div>
+					
+						<div class="pull-right  input-group col-lg-3 "  >
+							  <input type="text" class="form-control " placeholder="search in db">
+							  <span class="input-group-btn">
+								<button class="btn btn-default" type="button">Search!</button>
+							  </span>
+						</div>
+
+	</div>						
+						-->
+						
+						
+<div class="row  ">
+	<div class="col-xs-6   ">
+		
+		<ul class="list-inline" id="mainlist" >
+      
+	
+								  <li>
+								  <div id="fullid" ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+										<img id="fullidinside" src="img/001.png" draggable="true" ondragstart="drag(event)" width="50" height="50" class="img-thumbnail">
+									</div>
+								  </li>
+				  
+								  <li>
+										  <div id="shampain" ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+												<img id="shampaininside" src="img/000.png" draggable="true" ondragstart="drag(event)" width="50" height="50" class="img-thumbnail">
+											</div>
+								  </li>
+								  <li>
+										  <div id="user" ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+												<img id="userinside" src="img/user.png" draggable="true" ondragstart="drag(event)" width="50" height="50" class="img-thumbnail">
+											</div>
+								  </li>
+								  <li>
+										  <div id="car" ondrop="swapdrop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+												<img id="carinside" src="img/car.png" draggable="true" ondragstart="drag(event)" width="50" height="50" class="img-thumbnail">
+											</div>
+								  </li>
+								  <li>
+										  <div id="girl" ondrop="swapdrop(event)" ondragover="allowDrop(event)"  draggable="true">
+												<img id="girlinside" src="img/girl.png"  width="50" height="50" ondragstart="drag(event)" class="img-thumbnail">
+											</div>
+								  </li>
+								  
+		</ul>	
+			
+	
+	</div>
+	
+	
+	<div class="col-xs-1 ">
+										<div   id="imgcopy"   ondrop="dropcopy(event)" ondragover="allowDrop(event)" >
+												
+												<img id="imgcopyid" src="li.png" alt="drop img to copy "  width="100" height="70" class="img-thumbnail">
+												</div>
+										
+	</div>
+	
+	<div class="col-xs-1 ">
+										<div   id="imgrmv"   ondrop="dropremove(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+												
+												<img id="imgrmvid" src="li.png" alt="drop img to rmv"  width="100" height="70" class="img-thumbnail">
+										</div>
+										
+	</div>
+	
+	<div class="col-xs-1 ">
+	</div>
+	
+	<div  class="col-xs-3 " >
+	
+						
+									<div class="input-group">
+									  <input type="text" class="form-control" placeholder="search in db">
+									  <span class="input-group-btn">
+										<button class="btn btn-default" type="button">Go!</button>
+									  </span>
+									</div><!-- /input-group -->
+						
+			
+	
+	</div>
+
+
+
+</div>	
+
+
+<div class="row row-offcanvas row-offcanvas-right ">
+
+    <div class="col-xs-12 col-sm-9 ">
+        
+        <div class="jumbotron"> 
+			<!--
+			<a class="btn btn-lg btn-primary" href="#" onclick="addbybutton()">
+
+				add img  �
+
+			</a>
+			
+			<div class="btn-group pull-right">
+										  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											select your tense   <span class="caret"></span>
+										  </button>
+										  <ul class="dropdown-menu" role="menu">
+											<li><a href="#">past</a></li>
+											<li><a href="#">present</a></li>
+											<li><a href="#">future </a></li>
+											
+										  </ul>
+			</div>	-->
+			<div class="pull-right col-xs-3">
+							<select  id="tensesid" class="form-control ">
+							  <option>Past</option>
+							  <option>Present</option>
+							  <option>Future</option>
+							  
+							</select>
+			</div>		
+			
+		<br>	
+			
+		<ul class="list-inline" id="mainlist2" >
+      
+	
+								  <li>
+										<div   id="mainlist2childid"    ondrop="dropcopymaininside(event)" ondragover="allowDrop(event)" >
+												
+												<img id="mainlist2childimgid" src="li.png" alt="drop img "  width="50" height="50" class="img-thumbnail">
+												
+										</div>
+								  
+								  </li>
+								  
+		</ul>	
+			
+		
+			
+										
+			<br>
+			<ul  id="mainlist3" class="list-unstyled" >
+      
+	
+								  
+								  
+			</ul>	
+			
+			<!--
+			<button type="button" class="btn btn-primary " onclick="$('#disabledInputfinalstring').html('')">Create new buzz</button>
+			-->
+			
+			<div id="smalltextid" >
+			
+			</div>
+			
+			<br>
+			<!-- new modify buzzline middle show
+			<a class="btn btn-lg btn-primary" href="#" onclick="modifybuzzline()"> 	modify existing buzzline �	</a>
+			<div id="modifybuzzlineid"></div>
+			-->
+			
+			
+			<div class="input-group col-xs-6 pull-right">
+												  <input type="text" id="customkeywordid" class="form-control" placeholder="Add custom keyword">
+												  <span class="input-group-btn">
+													<button class="btn btn-default" type="button" onclick="finalstringgetselectedbuttonvalue(document.getElementById('customkeywordid').value)">Add!</button>
+												  </span>
+											</div><!-- /input-group -->
+			
+			<br>
+						
+											
+											<span class="label label-info">Buzzstring</span>
+											<div class="alert alert-info" id="disabledInputfinalstring"></div>
+											
+											<button type="button" class="btn btn-success btn-sm" onclick="insertintodb()">Done</button>
+											<span class="label label-info pull-right" id="buzzstringcal" >length of buzz string out of : 0/120</span>
+											<br>
+											
+											
+											
+											
+											<br>
+											<!--
+											<div  class="col-xs-6" >
+												<div class="input-group">
+													  <input type="text" class="form-control" placeholder="add new keyword">
+													  
+														<div class="input-group-btn btn-group open">
+									
+																																		
+																		<button class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown" type="button" value="positive">  positive <span class="caret"></span> </button>
+						
+																		 <ul class="dropdown-menu pull-right" role="menu" >
+																			<li role="presentation" class="dropdown-header">positive </li>
+																			<li><a onclick="dropdownsection()" >positive</a></li>
+																			<li><a onclick="dropdownsection()" >postive abc</a></li>
+																			<li role="presentation" class="dropdown-header">Negative </li>
+																			<li><a onclick="dropdownsection()">negative</a></li>
+																			<li><a onclick="dropdownsection()">negative abc</a></li>
+																		  </ul>
+
+															</div>
+												
+												</div>
+											
+											
+											</div>	
+											<br>
+											<div  class="col-xs-6" >
+												<div class="input-group">
+													  <input type="text" class="form-control" placeholder="add new keyword">
+													  
+														
+									
+																																		
+																	<select class="form-control ">
+																	  <option>Past</option>
+																	  <option>Present</option>
+																	  <option>Future</option>
+																	  
+																	</select>
+
+															
+												
+												</div>
+											
+											
+											</div>	-->	
+												
+											
+												
+												
+			
+		</div>
+       
+
+	   <div class="row">
+            <ul class="nav nav-tabs">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<li class="active"><a href="#tab1" data-toggle="tab">Newest</a></li>
+							<li><a href="#tab2" data-toggle="tab">In progress</a></li>
+							<li><a href="#tab3" data-toggle="tab">Pasued</a>  </li>
+							<li><a href="#tab4" data-toggle="tab">Finished</a>  </li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about new</div>
+				<div class="tab-pane" id="tab2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about progress</div>
+				<div class="tab-pane" id="tab3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about paused</div>
+				<div class="tab-pane" id="tab4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about finish</div>
+			</div>	
+        </div>
+        
+		
+    </div>
+    
+    <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
+        <div class=" sidebar-nav" id="sidebarchild">
+            
+										  <div class="panel-group" id="accordion">
+										  
+													  <div class="panel panel-default">
+																	
+																	<div class="panel-heading">
+																	  <h4 class="panel-title">
+																	  
+																		<a class="accordion-toggle" id="sidebaritem1link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+																		  Collapsible Group Item #1
+																		</a>
+																		
+																	  </h4>
+																	</div>
+																	
+																	<div id="collapseOne" class="panel-collapse collapse in">
+																		<div class="panel-body" id="sidebaritem1body">
+																	  
+																			<div class="btn-group-vertical btn-block" data-toggle="buttons" id="sidebaritem1bodybuttongrp">
+																							<label class="btn btn-default  ">
+																								<input type="radio" name="options" id="option1"> Option 1
+																							  </label>
+																							  <label class="btn btn-default">
+																								<input type="radio" name="options" id="option2"> Option 2
+																							  </label>
+																							  <label class="btn btn-default ">
+																								<input type="radio" name="options" id="option3"> Option 3
+																					  </label>
+																			
+
+																			</div>
+																	  
+																		</div>
+																  </div>
+																  
+													  
+													  </div>
+										  
+													  <div class="panel panel-default">
+																
+																<div class="panel-heading">
+																  <h4 class="panel-title">
+																	<a class="accordion-toggle" data-toggle="collapse" id="sidebaritem2link" data-parent="#accordion" href="#collapseTwo">
+																	  Collapsible Group Item #2
+																	</a>
+																  </h4>
+																</div>
+																
+																<div id="collapseTwo" class="panel-collapse collapse">
+																  <div class="panel-body" id="sidebaritem2body">
+																  
+																				<div class="btn-group-vertical btn-block btn-group" id="sidebaritem2bodybuttongrp" data-toggle="buttons">
+																							<label class="btn btn-default">
+																								<input type="checkbox"> checkbox 1
+																							  </label>
+																							  <label class="btn btn-default">
+																								<input type="checkbox"> checkbox 2
+																							  </label>
+																							  <label class="btn btn-default">
+																								<input type="checkbox"> checkbox 3
+																							  </label>
+																				</div>
+																	
+																  </div>
+																</div>
+														
+													  </div>
+										  
+													  <div class="panel panel-default">
+														
+																		<div class="panel-heading">
+																		  <h4 class="panel-title">
+																			<a class="accordion-toggle" data-toggle="collapse"  id="sidebaritem3link" data-parent="#accordion" href="#collapseThree">
+																			  Collapsible Group Item #3
+																			</a>
+																		  </h4>
+																		</div>
+														
+														
+																		<div id="collapseThree" class="panel-collapse collapse">
+																			<div class="panel-body" id="sidebaritem3body">
+																
+																					<div class="btn-group-vertical btn-block" id="sidebaritem3bodybuttongrp" data-toggle="buttons">
+																							<button type="button"  value="3.1" class="btn btn-default" onclick=alert("hi")>3.1</button>				
+																							<button type="button"  value="3.2" class="btn btn-default" onclick="finalstringgetselectedbuttonvalue(this.value)">3.2</button>
+																					</div>
+																
+																			</div>
+																		</div>
+										  
+														</div>
+										
+										
+										
+										   </div>
+
+        </div>
+        
+    </div>
+    
+
+</div>
+
+
+
+
+
+</div>
+
+
+	
+	<div class="modal fade" id="createnewbuz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Buzz uplaod</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+		<input type="file" id="fileid" class="btn btn-primary" > </input>
+		
+		your new buz
+		
+		<div class="input-group">
+			  <input type="file" class="form-control">
+			  <span class="input-group-addon">upload</span>
+		</div>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+	
+	
+	
+	<script src="js/jquery.js"></script>
+	 <script src="js/bootstrap.js"></script>	
+	 <script src="js/modal.js"></script>	
+	 <script src="js/tooltip.js"></script>
+</body>

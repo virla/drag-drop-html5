@@ -1,0 +1,358 @@
+<head>
+    <style type="text/css">
+       
+    </style>
+	
+	 <link href="css/bootstrap.css" rel="stylesheet">
+	 <link href="css/bootstrap-theme.css" rel="stylesheet">
+	
+	
+	
+	
+	
+    <script>
+	
+	function allowDrop (ev) {
+   ev.preventDefault ();
+}
+
+function drag (ev) {
+  ev.dataTransfer.setData ("src", ev.target.id);
+}
+
+function drop (ev) {
+  ev.preventDefault ();
+  
+  var src = document.getElementById (ev.dataTransfer.getData ("src"));
+  
+  var srcParent = src.parentNode;
+  var tgt = ev.currentTarget.firstElementChild;
+
+  ev.currentTarget.replaceChild (src, tgt);
+  srcParent.appendChild (tgt);
+}
+
+  function dropcopy(ev)
+                    {
+                    ev.preventDefault();
+                    var data=ev.dataTransfer.getData("src");
+					console.log("first log " + data )
+					
+                    var copyimg = document.createElement("img");
+					console.log(" 2: " + copyimg )
+					
+                    var original = document.getElementById(data);
+					console.log("3rd " + original )
+					
+                    copyimg.src = original.src;
+					
+					console.log(original.src)
+					var reult = original.src.split("/")
+					console.log(reult[reult.length-1])
+					
+					
+					$("#mainlist").append('<li><div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">					<img id="drag2" src='+ reult[reult.length-1] + ' draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail"></div></li>')
+					
+                    //ev.target.appendChild(copyimg);
+
+                    }
+ 
+
+ function drop2(ev)
+{
+ev.preventDefault();
+var data=ev.datacopy.getData("src");
+console.log(ev.target)
+//var ans = ev.target
+//$("#aaa").html('')
+//ev.target.appendChild(document.getElementById(data));
+$("#mainlist").append(document.getElementById(data))
+}
+/*
+ImageElement png = new ImageElement(src: 'icons/smiley-happy.png');
+
+SortableGroup sortGroup1 = new SortableGroup()
+..installAll(queryAll('#sortable-two-groups .group1 li'))
+..onSortUpdate.listen((SortableEvent event) {
+  event.originalGroup.uninstall(event.draggable);
+  event.newGroup.install(event.draggable);
+});
+
+SortableGroup sortGroup2 = new SortableGroup(
+    dragImageFunction: (Element draggable) => new DragImage(png, 5, 5))
+..installAll(queryAll('#sortable-two-groups .group2 li'))
+..onSortUpdate.listen((SortableEvent event) {
+  event.originalGroup.uninstall(event.draggable);
+  event.newGroup.install(event.draggable);
+});
+
+// Only accept elements from this section.
+sortGroup1.accept.addAll([sortGroup1, sortGroup2]);
+sortGroup2.accept.addAll([sortGroup1, sortGroup2]);
+*/
+
+    </script>
+	
+	 <script src="js/bootstrap.min.js"></script>
+	 <script src="js/bootstrap.js"></script>	
+</head>
+
+<body>
+	 <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li ><a href="./">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+<p>
+<br>	
+<br><br>
+
+
+	
+<div class="container">
+
+
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+   
+  <div class="panel-heading">
+  
+				
+					<ul class="list-inline" id="mainlist" >
+      
+	
+								  <li>
+								  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+										<img id="drag1" src="01.jpg" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+									</div>
+								  </li>
+				  
+								  <li>
+										  <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+												<img id="drag2" src="lii.png" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+											</div>
+								  </li>
+								  
+				  <div  class="pull-right" id="div3"   ondrop="dropcopy(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<img id="drag2" src="li.png" alt="..."  width="50" height="49" class="img-thumbnail">
+						</div>
+					
+						<div class="pull-right  input-group col-lg-3 "  >
+							  <input type="text" class="form-control " placeholder="search in db">
+							  <span class="input-group-btn">
+								<button class="btn btn-default" type="button">Search!</button>
+							  </span>
+						</div><!-- /input-group -->
+				  
+				  
+						 
+						
+							
+				
+				</ul>
+							
+				</div>
+  
+  <div class="panel-body">
+  
+  
+				
+<div class="row row-offcanvas row-offcanvas-right ">
+
+    <div class="col-xs-12 col-sm-9 ">
+       
+			   <p class="pull-right visible-xs">
+					<button class="btn btn-primary btn-xs" data-toggle="offcanvas" type="button"> … </button>
+				</p>
+        <div class="jumbotron"> 
+		Buzzbuilder 
+		<br>
+			<a class="btn btn-lg btn-primary" href="#" onclick="">
+
+				View navbar docs »
+
+			</a>
+		
+		
+		</div>
+		
+		
+        <div class="row">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ul class="nav nav-tabs">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<li class="active"><a href="#tab1" data-toggle="tab">Home</a></li>
+							<li><a href="#tab2" data-toggle="tab">Profile</a></li>
+							<li><a href="#tab3" data-toggle="tab">Messages</a>  </li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about home</div>
+				<div class="tab-pane" id="tab2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about profile</div>
+				<div class="tab-pane" id="tab3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;about msg</div>
+			</div>	
+
+        </div>
+		
+		<br>
+		<br>
+		<br>
+        <!--
+
+        /row
+
+        --> 
+    </div>
+    <!--
+
+    /span
+
+    -->
+    <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
+        <div class=" sidebar-nav">
+										  <div class="panel-group" id="accordion">
+										  <div class="panel panel-default">
+											<div class="panel-heading">
+											  <h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												  Collapsible Group Item #1
+												</a>
+											  </h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+											  <div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											  </div>
+											</div>
+										  </div>
+										  <div class="panel panel-default">
+											<div class="panel-heading">
+											  <h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+												  Collapsible Group Item #2
+												</a>
+											  </h4>
+											</div>
+											<div id="collapseTwo" class="panel-collapse collapse">
+											  <div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											  </div>
+											</div>
+										  </div>
+										  <div class="panel panel-default">
+											<div class="panel-heading">
+											  <h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+												  Collapsible Group Item #3
+												</a>
+											  </h4>
+											</div>
+											<div id="collapseThree" class="panel-collapse collapse">
+											  <div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											  </div>
+											</div>
+										  </div>
+										</div>
+
+
+
+
+
+
+        </div>
+        <!--
+
+        /.well 
+
+        --> 
+    </div>
+    <!--
+
+    /span
+
+    --> 
+
+</div>
+
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+	
+	
+	
+	
+	
+	
+	
+  </div>
+
+  <!-- List group
+  <ul class="nav nav-pills">
+      
+	
+  <li>
+  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="drag1" src="01.jpg" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+    </div>
+  </li>
+  
+  <li>
+  <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="drag2" src="lii.png" draggable="true" ondragstart="drag(event)" width="50" height="49" class="img-thumbnail">
+    </div>
+  
+  </li>
+  
+  </ul>
+  <table class="table table-bordered">
+				<tr><td > hi</td><td rowspan="2"> large </td></tr>
+				<tr><td >hi222</td></tr>
+			</table>
+ -->
+
+
+</div>
+
+
+</div>
+	<script src="js/jquery.js"></script>
+	 <script src="js/bootstrap.js"></script>	
+</body>
